@@ -29,6 +29,8 @@ public class RegisterFragment extends Fragment {
     private ImageView imageView;
     private Uri uri;
     private String tag = "17novV1";
+    private MyAlert myAlert;
+
 
 
     public RegisterFragment() {
@@ -38,6 +40,8 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        myAlert = new MyAlert(getActivity());
 
 //        Create Toolbar
         createToolbar();
@@ -108,7 +112,7 @@ public class RegisterFragment extends Fragment {
 
     private void createToolbar() {
         Toolbar toolbar = getView().findViewById(R.id.toolbarRegister);
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Register");
         ((MainActivity) getActivity()).getSupportActionBar().setSubtitle("Please Fill Every Blank");
         ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
