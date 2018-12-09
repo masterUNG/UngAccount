@@ -19,6 +19,47 @@
             android:layout_height="?attr/actionBarSize"/>
 
         <!--Content-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--RecyclerView-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewUser"
+                android:layout_above="@+id/relativeBotton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+            <!--Post-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/relativeBotton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--Post Message-->
+                <EditText
+                    android:inputType="text"
+                    android:id="@+id/edittextMessage"
+                    android:layout_weight="4"
+                    android:hint="Message :"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <!--Post Button-->
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/buttonPost"
+                    android:text="Post"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
 
 
     </LinearLayout>
