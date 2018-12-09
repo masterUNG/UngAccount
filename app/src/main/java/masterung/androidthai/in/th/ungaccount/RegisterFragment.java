@@ -27,6 +27,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -121,7 +123,7 @@ public class RegisterFragment extends Fragment {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Upload Avatar Image");
         progressDialog.setMessage("Please Wait Few Minus...");
-        progressDialog.show();
+
 
 
 //        Get Value From EditText
@@ -136,11 +138,13 @@ public class RegisterFragment extends Fragment {
         if (avataABoolean) {
 //            Non Choose Avatar
             myAlert.normalDialog("Non Choose Avatar", "Please Choose Avatar");
+
         } else if (nameString.isEmpty() || emailString.isEmpty() || passwordString.isEmpty()) {
 //            Have Space
             myAlert.normalDialog(getString(R.string.title_have_space), getString(R.string.message_have_space));
         } else {
 //            Data OK
+            progressDialog.show();
             FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
             StorageReference storageReference = firebaseStorage.getReference();
             storageReference.child("Avatar/" + nameString)
@@ -201,6 +205,18 @@ public class RegisterFragment extends Fragment {
         uidString = firebaseAuth.getUid();
         Log.d("9decV1", "uidString ==> " + uidString);
 
+//        Upload Valut to Database
+//        Add Value to Model
+        UserModel userModel = new UserModel(avatarString, "Hello App", nameString, uidString);
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("User").child(uidString);
+        databaseReference.setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
 
 
     }   // updateDatabase
